@@ -1,0 +1,263 @@
+/* ----------- iPhone 4 and 4S ----------- */
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+
+    #jqt .current {
+      background-color:#ff9900;
+    }
+    .versusNav, .observeNav {
+        height: 60px;
+    }
+    .gameButton {
+        padding: 8px 8px 0 8px;
+    }
+    #new .greenButton {
+      width: 200px;
+      margin: -10px 0 10px 10px !important;
+    }
+    #new {
+      background-position: 0 360px;
+    }
+    .colorOption img {
+      height: 20px;
+    }
+    #observe .whiteButton {
+      margin: 0px auto 10px auto !important;
+      padding-top:0;
+      line-height: 58px;
+    }
+    #observe p {
+      line-height: 18px;
+    }
+    #home .whiteButton {
+      margin: 0px auto 10px auto !important;
+      padding-top:0;
+      line-height: 58px;
+    }
+    p.center.forget {
+        margin-top: 10px !important;
+        padding-bottom: 20px;
+    }
+}
+
+
+
+/* ----------- iPhone 5 and 5S ----------- */
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+    .heightAdjuster {
+      height: 20px;
+    }
+    .versusNav, .observeNav {
+        height: 60px;
+    }
+    .whiteButton {
+        margin-bottom: 30px !important;
+    }
+    #new .greenButton {
+      width: 300px;
+      margin: 0 auto 10px !important;
+    }
+    #new {
+        background-position: 0px bottom;
+    }
+    #observe .whiteButton, #home .whiteButton {
+      margin: 0 auto 30px !important;
+      padding-top: 4px !important;
+      line-height: 60px !important;
+    }
+}
+
+
+/* ----------- iPhone 6 ----------- */
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 667px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) { 
+    .versusNav, .observeNav {
+        height: 60px;
+    }
+    .heightAdjuster {
+      height: 50px;
+    }
+    .whiteButton {
+        margin-bottom: 30px !important;
+    }
+}
+
+
+/* ----------- iPhone 6+ ----------- */
+
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 414px) 
+  and (max-device-width: 736px) 
+  and (-webkit-min-device-pixel-ratio: 3)
+  and (orientation: portrait) { 
+    .heightAdjuster {
+      height: 50px;
+    }
+    .whiteButton {
+        margin-bottom: 30px !important;
+    }
+    .versusNav, .observeNav {
+        height: 60px;
+    }
+  #board, .board-overlay, .board-wrapper, .whiteInfo, .blackInfo {
+      width: 95vw;
+  }
+    .board-overlay {
+      margin-top: -95vw;
+    } 
+}
+
+/* ----------- iPad mini ----------- */
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+
+}
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (orientation: portrait) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+
+}
+
+/* Landscape */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (orientation: landscape) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+
+}
+
+/* ----------- iPad 1 and 2 ----------- */
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+    .whiteButton {
+        margin-bottom: 30px !important;
+    }
+}
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (orientation: portrait) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+    .heightAdjuster {
+      height: 150px;
+    }
+    #more .heightAdjuster {
+      height: 100px;
+    }
+    .topBar {
+      margin-top: 20px;
+    } 
+    .bottomBar {
+      margin-bottom: 75px;
+    }
+}
+
+/* Landscape */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (orientation: landscape) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+    .heightAdjuster {
+      height: 50px;
+    }
+    #more .heightAdjuster {
+      height: 20px;
+    }
+    .topBar {
+      margin-top: 20px;
+    }  
+  #board, .board-overlay, .board-wrapper, .whiteInfo, .blackInfo {
+      width: 50vw;
+  }
+    .board-overlay {
+      margin-top: -50vw;
+    }  
+}
+
+/* ----------- iPad 3 and 4 ----------- */
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .whiteButton {
+        margin-bottom: 30px !important;
+    }
+
+}
+
+/* Portrait */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (orientation: portrait) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .heightAdjuster {
+      height: 150px;
+    }
+    #more .heightAdjuster {
+      height: 100px;
+    }
+    .topBar {
+      margin-top: 20px;
+    } 
+    .bottomBar {
+      margin-bottom: 75px;
+    }
+}
+
+/* Landscape */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (orientation: landscape) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+    .heightAdjuster {
+      height: 50px;
+    }
+    #more .heightAdjuster {
+      height: 20px;
+    }
+    .topBar {
+      margin-top: 20px;
+    }  
+  #board, .board-overlay, .board-wrapper, .whiteInfo, .blackInfo {
+      width: 50vw;
+  }
+    .board-overlay {
+      margin-top: -50vw;
+    }  
+}

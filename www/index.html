@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+    <link href="css/chessboard-0.3.0.css" rel="stylesheet">
+    <style type="text/css" media="screen">
+    @import "css/innsbruck.min.css";
+    </style>
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link href="css/styles.css" rel="stylesheet">
+    <style type="text/css">
+    #openGames h1 {
+      margin-top: 5px !important;
+      margin-bottom: 0 !important;
+    }
+  .square {
+    float: left;
+    border-width: 0px;
+    text-align: center;
+    padding: 0 0 5px 0;
+  }
+  .square a {
+    color: #666;
+    text-decoration: none;
+  }
+  .square.unavailable {
+    opacity: 0.2;
+  }
+
+  .tableChallenger {
+    font-size: 10px;
+  }
+  .tableTime {
+    font-size: 20px;
+  }
+
+  .tableColor {
+    height: 25px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    display: block;
+  }
+  .tableColor.white {
+        background-image: url("img/asBlack.svg");
+  }
+  .tableColor.black {
+        background-image: url("img/asWhite.svg");
+  }
+  .tableColor {
+      background-image: url("img/asAutomatic.svg");
+  }
+
+  .inviteIcons {
+    height: 25px;
+    width: 100%;
+    overflow: hidden;
+  }
+.filterRow {
+  background-color: #fff;
+  padding-top: 5px;
+}
+.sortRow a, .filterRow a {
+  text-decoration: none;
+  background-color: #ccc;
+  margin: 0 1px 5px 0;
+  color: #fff;
+  text-align: center;
+}
+.sortRow a, .filterRow a, .sortTitle {
+  width: 18%;
+  float: left;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  height: 15px;
+}
+.yourColor {
+  float: left;
+  padding: 7px 5px;
+}
+.spacer {
+  width: 4%;
+  float: left;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  height: 15px;
+}
+.sortTitle {
+  padding-left: 10px;
+  background-color: #fff;
+}
+.filterRow a.refresh {
+/*  padding: 0;
+  height: 29px;*/
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+.filterButton.showRated.highlight, .filterButton.showUnrated.highlight {background-color: #ec008c;}
+.filterButton.showBlack.highlight, .filterButton.showWhite.highlight {background-color: #29abe2;}
+
+ul.availableGames li.highlightPink img {
+  border-left-color:#ec008c;
+  border-left-style: solid;
+  border-left-width: 5px;
+}
+ul.availableGames li.highlightBlue {
+  border-left-color:#29abe2;
+  border-left-style: solid;
+  border-left-width: 5px;
+}
+ul.availableGames li img {
+  border-left-color:#fff;
+  border-left-style: solid;
+  border-left-width: 5px;
+}
+.square .square-inner {
+/*  margin: 0 auto 0 auto;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #efefef;*/
+  background-color: #efefef;
+}
+.square {
+  width: 100%;
+  margin: 0 2.5%;
+}
+
+/*.square-inner {
+  width: 100%;  
+    background-color: #e1e1e1;
+}*/
+  .inviteMinutes, .inviteSeconds {
+  /*width: 45%;*/
+    color: #676767;
+    float: left;
+/*    display: inline-block; 
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #676767;*/
+  }
+  .inviteSeconds {
+/*    border-left-style: solid;
+    border-left-width: 1px;
+    border-left-color: #676767;  */
+  }
+  img.inviteRatedUnrated {
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-left-color: #676767;  
+  }
+  .availableGames img {
+    float: left;
+    width: 10%;
+    margin-right: 10px;
+    /*max-width: 45%;*/
+/*    border-top-style: solid;
+    border-top-width: 1px;
+    border-top-color: #676767;*/  
+  }
+.availableGames span {
+  margin-top: 3%;
+  display: inline-block;
+}
+
+ul.availableGames li {
+  border-right-color: #fff;
+  border-right-style: solid;
+  border-right-width: 5px;
+  border-left-color: #fff;
+  border-left-style: solid;
+  border-left-width: 5px;
+  min-height: 0 !important;
+  margin: 0;
+  padding: 0 !important;
+  max-height: 75px;
+  overflow: hidden !important;
+  -webkit-transition: max-height 1s !important;  
+  transition: max-height 1s !important;  
+
+/*    -webkit-transition: -webkit-transform .5s !important;
+    -webkit-transform-origin: top !important;
+    transform-origin: top !important;
+    transition: transform .5s !important;*/
+}
+
+
+
+ul.availableGames li.slideHide {
+/*    -webkit-transform: scaleY(0) !important;
+    transform: scaleY(0) !important;*/
+
+  max-height: 0;
+}
+
+
+
+
+
+
+
+    </style>
+    <title>Chess Server</title>
+</head>
+
+<body>
+<div id="jqt">
+  <!-- Game -->
+  <div id="game" class="currentX" ontouchmove="BlockMove(event);">
+    <div class="heightAdjuster"></div>
+    <div class="topBar">
+      <div class="blackInfo">
+        <div class="blackName"></div>
+        <div class="blackRating"></div>
+        <div id="blackTime">0</div>
+        <div id="blackTimeVisible" class="blackTime pink">0</div>
+      </div>
+    </div>
+    <div class="board-wrapper">
+      <div id="board" class=""></div>
+      <div class="board-overlay">
+        <img onclick="$('.board-overlay').hide(),$('#board').removeClass('gameover');" class="closeButton" src="img/toolbar-close.svg">
+        <div class="game-over">Game Over.
+          <div class="result"></div>
+          <div class="rating-change"></div>
+        </div>
+      </div>
+    </div>
+    <div class="bottomBar">
+      <div class="whiteInfo">
+        <div class="whiteName"></div>
+        <div class="whiteRating"></div>
+        <div id="whiteTime">0</div>
+        <div id="whiteTimeVisible" class="whiteTime pink">0</div>
+      </div>
+    </div>
+    <img class="navToggle versus" onclick="$('.versusNav').addClass('slideRight').removeClass('slideLeft');" src="img/toolbar-reveal3.svg">
+    <div class="versusNav versus slideLeft">
+      <div class="gameButton exit">Exit</div>
+      <div class="gameButton abort">Abort</div>
+      <div class="gameButton adjourn">Adjourn</div>
+      <div class="gameButton resign">Resign</div>
+      <div class="gameButton draw">Draw</div>
+      <div class="gameButton rematch">Rematch</div>
+      <div class="gameButton takeback">Takeback</div>
+      <!-- <div class="gameButton getGameInfo">Info</div> -->
+      <!-- <div class="gameButton">History</div>                 -->
+      <!-- <div class="gameButton">Chat</div>                 -->
+      <div class="gameButton chat">Chat</div>
+      <!-- <div class="gameButton console">Console</div> -->
+      <img class="closeNav" onclick="$('.versusNav').removeClass('slideRight').addClass('slideLeft');" src="img/toolbar-back3.svg">
+    </div>
+    <img class="navToggle observe" onclick="$('.observeNav').addClass('slideRight').removeClass('slideLeft');" src="img/toolbar-reveal3.svg">
+    <div class="observeNav observe slideLeft">
+      <div class="gameButton exitObservation">Exit</div>
+      <!-- <div class="gameButton console">Console</div>                 -->
+      <a class="gameButton observeNext" href="#" onclick="observeBest();">Next</a>
+      <div class="gameButton getGameInfo">Info</div><img class="" onclick="$('.observeNav').removeClass('slideRight').addClass('slideLeft');" src="img/toolbar-back2.svg">
+    </div>
+
+<!-- <a onclick="gameOver()">test</a> -->
+
+    <div class="chatWindow">
+      <img onclick="closeChat();" class="closeButton" src="img/toolbar-close.svg">
+      <img onclick="muteToggle();" class="muteButton unmuted" src="img/mute.svg">
+      <h1>Send <span class="opponentName"></span> a message:</h1>
+      <div class="chatButtons">
+        <a href="#" class="whiteButton" onclick="tellOpponent('hi');">hi</a>
+        <a href="#" class="whiteButton" onclick="tellOpponent('gl');">gl</a>
+        <a href="#" class="whiteButton" onclick="tellOpponent('gg');">gg</a>
+        <a href="#" class="whiteButton" onclick="tellOpponent('thx');">thx</a>
+        <a href="#" class="whiteButton" onclick="tellOpponent('bye');">bye</a>
+      </div>
+      <input id="chat-input" type="text" onkeypress="sendChat(event)" />
+      <p class="pink chatSent"></p>
+    </div>
+  </div>
+  <!-- Home -->
+  <div id="home" class="current app">
+  <div class="heightAdjuster"></div>
+    <h1 class="topHead">Connect to FICS as:</h1>
+    <a class="whiteButton" href="#" onclick="loginAsGuest();">Guest</a>
+    <a class="whiteButton" href="#login">Registered User</a>
+    <div class="loginAuto">
+      <a href="#" onclick="autoLogin();" class="whiteButton username">&nbsp;</a>
+      <p class="center forget"><a href="#" onclick="forgetUser();">Forget user: <span class="username"></span></a></p>
+    </div>
+    <p class="register center">To create a free FICS account, visit <a target="_blank" href="http://www.freechess.org/cgi-bin/Register/FICS_register.cgi?Language=English">freechess.org</a>.</p>
+    <!-- <a href="#game">View Board</a> -->
+  </div>
+  <!-- New Game -->
+  <div id="new" class="">
+    <div class="heightAdjuster"></div>
+    <h1 class="topHead">Game Settings</h1>
+    <form>
+      <ul class="edit rounded">
+        <li>Initial Time: <span class="initialTime">2</span> min
+          <!-- <input type="text" name="time" placeholder="Minutes" id="setTime"> -->
+          <img class="moreTime" src="img/plus.svg">
+          <img class="lessTime" src="img/minus.svg">
+        </li>
+        <li>Increment: <span class="increment">12</span> sec
+          <!-- <input type="text" name="time" placeholder="Seconds" id="setTime"> -->
+          <img class="moreIncrement" src="img/plus.svg">
+          <img class="lessIncrement" src="img/minus.svg">
+        </li>
+        <li class="rated">Rated: <span class="toggle"><input id="rated" type="checkbox"></span></li>
+        <li class="guest">Rated: (Registered users only)<img class="right" src="img/rated-off.png"></li>
+        <li>Your color:
+          <div class="colorOption white"><img class="asWhite" src="img/asWhite.svg"><br />White</div>
+          <div class="colorOption black"><img class="asBlack" src="img/asBlack.svg"><br /> Black</div>
+          <div class="colorOption automatic"><img class="asAutomatic" src="img/asAutomatic.svg"><br />Random</div>
+        </li>
+      </ul>
+    </form>
+    <a class="greenButton" href="#" onclick="seekGame();">Find Opponent</a>
+    <p class="center"><a class="pink" href="#" onclick="jQT.goTo('#main', 'slideright');">&lt; Cancel</a></p>
+  </div>
+  <!-- Open Games -->
+  <div id="openGames" class="">
+  <!-- <div class="heightAdjuster"></div> -->
+      <h1 class="topHead">Open Tables</h1>
+      <a style="padding: 10px; display: block; margin-top: -35px;" class="pink" href="#" onclick="exitOpenGameMode(),jQT.goTo('#main', 'slideright');">&lt; Cancel</a>
+
+    <div class="filterRow">
+      <!-- <span class="sortTitle">Filter by: </span> -->
+      <span class="yourColor">Your Color: </span>
+      
+      <a class="filterButton showWhite" href="#" onclick="showWhiteList();">White</a> 
+      <a class="filterButton showBlack" href="#" onclick="showBlackList();">Black</a> 
+      <span class="spacer"></span>
+      <a class="filterButton showRated" href="#" onclick="showRatedList();">Rated</a> 
+      <a class="filterButton showUnrated" href="#" onclick="showUnratedList();">Unrated</a> 
+<!--       <span class="spacer"></span>
+      <a class="refresh" href="#" onclick="showCompleteList();">Clear</a> -->
+    </div>
+
+<!--     <div class="sortRow">
+      <span class="sortTitle">Sort by: </span>
+      <a class="sortButton byTime" href="#" onclick="sortViewByTime();">Time</a>
+      <a class="sortButton byRating" href="#" onclick="sortViewByRating();">Rating</a>
+      <a class="sortButton byColor" href="#" onclick="sortViewByColor();">Color</a>
+      <a class="sortButton byRated" href="#" onclick="sortViewByRated();">Rated</a>
+    </div> -->
+
+
+
+<div class="grid">
+<!--   <div class="unavailable square box1"><div class="tableTime"><span>5m</span>:<span>3s</span></div><div class="tableChallenger"><span>aHanft</span> (<span>1200</span>)</div><div class="tableColor"></div></div> -->
+
+<!-- <div class="square box1">
+    <div class="table33" onclick="joinGame('33','DickBurns ')">
+        <div class="asAutomatic unrated square-inner">
+            <div class="inviteMinutes">12m</div>
+            <div class="inviteSeconds">0s</div><img src="img/asAutomatic.svg"><img class="inviteRatedUnrated" src="img/unrated.svg"></div>
+        <div class="tableChallenger"><span>DickBurns</span> <span></span></div>
+    </div>
+</div> -->
+
+<ul class="availableGames">
+</ul>
+
+<!--   <div class="square box1"></div>
+  <div class="square box2"></div>
+  <div class="square box3"></div>
+  <div class="square box4"></div>
+  <div class="square box5"></div>
+  <div class="square box6"></div>
+  <div class="square box7"></div>
+  <div class="square box8"></div>
+  <div class="square box9"></div>
+  <div class="square box10"></div>
+  <div class="square box11"></div>
+  <div class="square box12"></div>
+  <div class="square box13"></div>
+  <div class="square box14"></div>
+  <div class="square box15"></div>
+  <div class="square box16"></div>
+  <div class="square box17"></div>
+  <div class="square box18"></div>
+  <div class="square box19"></div>
+  <div class="square box20"></div>
+  <div class="square box21"></div>
+  <div class="square box22"></div>
+  <div class="square box23"></div>
+  <div class="square box24"></div> -->
+<!--   <div class="square box25"></div>
+  <div class="square box26"></div>
+  <div class="square box27"></div>
+  <div class="square box28"></div>
+  <div class="square box29"></div>
+  <div class="square box30"></div>
+  <div class="square box41"></div>
+  <div class="square box42"></div>
+  <div class="square box43"></div>
+  <div class="square box44"></div>
+  <div class="square box45"></div>
+  <div class="square box46"></div>
+  <div class="square box47"></div>
+  <div class="square box48"></div>
+  <div class="square box49"></div>
+  <div class="square box50"></div> -->
+</div>
+
+<a href="#" onclick="loopThroughGameList(demoArray)">Array 0</a>
+<a href="#" onclick="loopThroughGameList(demoArray1)">Array 1</a>
+<a href="#" onclick="loopThroughGameList(demoArray2)">Array 2</a>
+<a href="#" onclick="loopThroughGameList(demoArray3)">Array 3</a>
+<a href="#" onclick="loopThroughGameList(demoArra4)">Array 4</a>
+<a href="#" onclick="loopThroughGameList(demoArray5)">Array 5</a>
+<a href="#" onclick="loopThroughGameList(demoArray6)">Array 6</a>
+<a href="#" onclick="loopThroughGameList(demoArray7)">Array 7</a>
+<a href="#" onclick="loopThroughGameList(demoArray8)">Array 8</a>
+
+<!-- <a href="#" onclick="loopThroughGameList(demoArray9)">Array 9</a> -->
+<!-- <a href="#" onclick="loopThroughGameListTest('testlist2')">List 1</a> -->
+
+  </div>
+
+
+  <!-- Login -->
+  <div id="login" class="">
+    <div class="heightAdjuster"></div>
+    <h1 class="topHead">Registered User Login</h1>
+    <h1>Username</h1>
+    <input id="user" type="text" />
+    <h1>Password</h1>
+    <input id="password" type="password" />
+    <a class="blueButton" href="#" onclick="loginAs();">Log In</a>
+    <p class="center"><a class="pink" href="#" onclick="jQT.goTo('#home', 'slideright');">&lt; Cancel</a></p>
+  </div>
+  <!-- Connecting -->
+  <div id="connecting" class="">
+    <div class="heightAdjuster"></div>
+    <h1 class="topHead">Connecting...</h1>
+    <div class="connectMessage">
+      <div class="connectSpinner"></div>
+    </div>
+    <p class="center"><a class="pink" href="#" onclick="jQT.goTo('#home', 'slideright');">&lt; Cancel</a></p>
+  </div>
+  <!-- Waiting For Opponent -->
+  <div id="waiting" class="">
+  <div class="heightAdjuster"></div>
+    <div class="waitingMessage">
+      <div class="waitingSpinner"></div>
+      <p>Waiting for opponent.<br />Your invite was seen by <span class="inviteDetailsViewedBy">? player</span>s.</p>
+    </div>
+    <ul class="edit rounded">
+      <li>Initial Time: <span class="inviteDetailsTime"></span></li>
+      <li>Increment: <span class="inviteDetailsIncrement"></span></li>
+      <li>Rated: <span class="inviteDetailsRated"></span></li>
+      <li>Your color: <span class="inviteDetailsColor"></span></li>
+    </ul>
+    <!-- <div class="inviteDetails"></div> -->
+    <p class="center"><a class="cancelSeek" href="#" onclick="jQT.goTo('#new', 'slideright');">&lt; Cancel Invite</a></p>
+  </div>
+  <!-- main -->
+  <div id="main" class="">
+    <div class="heightAdjuster"></div>
+    <h1 class="topHead">Welcome<span class="loginStatus"></span></h1>
+    <a class="whiteButton" href="#new">Create New Game</a>
+    <div class="whiteButton soughtGames">View Open Tables</div>
+    <a class="whiteButton" href="#observe">Watch Top Players</a>
+    <a class="whiteButton" href="#more">More Chess Apps</a>
+    <p class="center"><a class="pink" href="#" onclick="logout();">&lt; Log Out</a></p>
+  </div>
+  <!-- Observe -->
+  <div id="observe" class="">
+    <div class="heightAdjuster"></div>
+    <h1 class="topHead">Observe Games</h1>
+    <p>You can watch live games played by the best players on the Free Internet Chess Server. Select the type of game you want to observe. </p>
+    <a class="whiteButton" href="#" onclick="observeBest('Lightning');">Lightning</a>
+    <a class="whiteButton" href="#" onclick="observeBest('Blitz');">Blitz</a>
+    <a class="whiteButton" href="#" onclick="observeBest('Standard');">Standard</a>
+    <p class="center"><a class="pink" href="#" onclick="jQT.goTo('#main', 'slideright');">&lt; Cancel</a></p>
+  </div>
+  <!-- More -->
+  <div id="more" class="">
+    <div class="heightAdjuster"></div>
+    <h1 class="topHead">More Chess Apps</h1>
+    <p>Hi, I'm Adrian. I am the guy who created this app. No, there isn't a big corporation pulling the strings behind the curtain, just me. </p>
+    <p>It is important to me to keep this app free because people shouldn't have to pay to play chess, especially not on  FICS (the "F" stands for free after all). </p>
+    <p>If you want to support me, and keep this app free (and ad-free) please consider purchasing my other apps. Thanks for using my app!</p>
+    <p>Sincerely, <br />Adrian Hanft<br /><a target="_blank" href="http://adrian3.com">adrian3.com</a></p>
+    <ul class="rounded">
+      <li class="arrow"><a target="_blank" href="https://itunes.apple.com/us/app/grandmaster-archive/id471186727?mt=8">Grandmaster Archive ($4.99)</a></li>
+      <li class="arrow"><a target="_blank" href="http://itunes.apple.com/us/app/chess-puzzles-pro/id432827559?mt=8">Chess Puzzles Pro ($1.99)</a></li>
+      <li class="arrow"><a target="_blank" href="https://itunes.apple.com/gw/app/immortal-game-greatest-chess/id613890349?mt=8#">Immortal Game (FREE)</a></li>
+      <li class="arrow"><a target="_blank" href="https://itunes.apple.com/us/app/eugene-chess-hd/id418816633?mt=8">Eugene (FREE)</a></li>
+    </ul>
+    <p class="center"><a class="pink" href="#" onclick="jQT.goTo('#main', 'slideright');">No thanks.</a></p>
+  </div>
+
+</div><!-- End JQT -->
+
+<div style="pointer-events: none; position: absolute; z-index:999; bottom: 0; width: 100%; height:100%;">
+<a onclick="openConsole();" style="pointer-events: auto;">[CONSOLE]</a>
+    <div class="consoleWindow">
+      <img style="pointer-events: auto;" onclick="closeConsole();" class="closeButton" src="img/toolbar-close.svg">
+      <!-- <h1>Console</h1> -->
+      <ul id="data-output">
+      </ul>
+      <input style="pointer-events: auto;" id="command-input" type="text" onkeypress="writeCommand(event)" /> <a style="pointer-events: auto;" onclick="window.clearInterval(refreshTimer);">X</a>
+    </div>
+</div>
+  <script src="cordova.js"></script>
+  <script src="js/jquery-2.1.1.min.js" type="application/x-javascript" charset="utf-8"></script>
+  <script src="js/jquery.easing.1.3.js" type="application/x-javascript" charset="utf-8"></script>
+  <script src="js/jqt.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="js/jqtouch-jquery.min.js" type="application/x-javascript" charset="utf-8"></script>
+  <script src="js/fastclick.js"></script>
+  <script src="js/chessboard-0.3.0.min.js"></script>
+  <script src="js/chess.min.js"></script>
+  <script src="js/min/app-min.js"></script>
+  <script src="js/availableGames.js"></script>
+  <!-- <script src="js/tinysort.min.js"></script> -->
+  <script src="js/tests.js"></script>
+  <script type="text/javascript">
+  app.initialize();
+  if (navigator.notification) {}else{init();} // for browser testing
+  </script>
+</body>
+
+</html>

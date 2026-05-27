@@ -1,0 +1,900 @@
+@font-face {
+    font-family: 'OpenSansCondensedLight';
+    src: url("../fonts/OpenSans-CondLight-webfont.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+#jqt, a, .toolbar h1, h1, h2, ul li, li.arrow, #tabbar a > strong {
+    font-family: 'OpenSansCondensedLight' !important;
+}
+p {
+    margin-left: 10px;
+}
+#jqt a.currentlevel {
+    text-decoration: underline;
+}
+#board, .board-overlay, .board-wrapper {
+    margin: 0 auto;
+    width: 95vw;
+}
+.delete {
+    display: inline-block;
+    float: right;
+    margin-right: 20px;
+}
+.menuicon {
+    width: 40px;
+    overflow: hidden;
+    background-image: url("img/list.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    /*background-color: #ff0000;*/
+    
+    margin: 0 0 0 -10px;
+    padding: 10px 10px 0 15px;
+}
+.toolbar {
+    margin: 0px auto;
+}
+.toolbar-back {
+    float: left;
+    margin: -3px 10px 0 -10px;
+}
+.toolbarDisplay {
+    float: left;
+    position: absolute;
+    overflow: hidden;
+    height: 30px;
+    left: 50%;
+    top: 10px;
+    display: block;
+    margin: -2px 0 0 -17px;
+}
+.toolbarDisplay .circle {
+    margin-top: 0;
+}
+a.menuicon {
+    color: transparent;
+    font-size: 28px;
+}
+p a {
+    float: left;
+    margin: 50px auto;
+    text-decoration: none;
+    color: #ccc;
+    text-align: center;
+    width: 100%;
+}
+body {
+    margin: 20px 0 0 0;
+    padding: 0;
+}
+.highlightTo {
+    transition: background-color 0.6s ease;
+    background-color: rgba(0, 174, 239, 1);
+}
+.highlightFrom {
+    transition: background-color 0.3s ease;
+    background-color: rgba(0, 174, 239, 0.8);
+}
+.button {
+    background-color: #ccc;
+    padding: 10px;
+}
+.button a {
+    color: #fff
+}
+#jqt .greenButton.sendInvite, #jqt .greenButton.resendInvite {
+    /*display: none;*/
+}
+#jqt .commitButton, #jqt .cancelButton {
+    display: none;
+    width: 40%;
+}
+#jqt .greenButton.commitButton {
+    float: right;
+    margin-left: 0;
+}
+#jqt .redButton.cancelButton {
+    float: left;
+    margin-right: 0;
+}
+
+#jqt .toolbar {
+    background-color: transparent;
+    border-bottom: none;
+    box-shadow: none;
+}
+.testpanel {
+    font-size: 9px;
+}
+.circle {
+    float: left;
+    border-radius: 50%;
+    width: 30px;
+    position: relative;
+    font-family: sans-serif;
+    color: #fff;
+    text-shadow: none;
+    font-size: 9px;
+    line-height: 10px;
+    margin: -5px 10px -5px 0;
+}
+/*.circle-center {
+  position: absolute;
+  overflow: hidden;
+  left:50%;
+  bottom: 9px;
+  display: block;
+  margin-left: -15px;
+  }*/
+
+.circle-solid {
+    background-color: gray;
+    background-size: 30px;
+}
+.circle:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+}
+.circle-inner {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    text-align: center;
+}
+.filter {
+  background-color: #ccc;
+  padding: 5px 10px;
+  margin-left: 5px;
+  float: left;
+}
+a.filter {
+  text-decoration: none;
+  color: #e2e2e2;
+}
+.subnav {
+  float: left;
+  clear: right;
+  width: 100%;
+  background-color: #ccc;
+  margin: 25px 0 0;
+}
+.filter.cancelList, .filter.editList {
+  float: right;
+}
+
+p a.editPhone {
+  text-align: left;
+  float: inherit;
+  margin: inherit; 
+  color: #000;
+  text-decoration: underline;
+}
+
+a.active-filter {
+  color: #fff;
+  text-decoration: underline;
+}
+.welcome {
+  padding: 0;
+  text-align: center;
+  display: none;
+}
+
+a.highlight {
+  background-color: #ec008c;
+}
+a.refresh {
+/*  background-image: url('../img/refresh.svg');
+  background-repeat: no-repeat;
+  background-position: center center;*/
+  margin-top: 5px;
+}
+#board.gameover {
+  opacity: 0.2;
+  -webkit-filter: grayscale(1);
+  filter: grayscale(0.8);
+  transition: all 0.5s ease;
+}
+.board-overlay {
+  background-color: rgba(0, 174, 239, 0.2);
+}
+.board-overlay .closeButton {
+/*  position: absolute;
+  top: 0;*/
+  margin: 5px 0 -25px 5px;
+  position: fixed;
+}  
+.game-over, .result, .rating-change {
+  text-align: center;
+  color: #000;
+  line-height: 30px;
+  font-size: 24px;
+}
+.game-over {
+  color: #ec008c;
+  font-weight: bold;
+    position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.slideLeft {
+    width: 100vw;
+    left: -100vw;
+    transition: all 0.5s ease;
+}
+.slideRight {
+    width: 100vw;
+    left: 0vw;
+    transition: all 0.5s ease;
+}
+.muteButton {
+    float: right;
+    margin-right: 20px;
+}
+.closeButton {
+    margin-left: 20px;
+}
+.muted {
+    opacity: 0.5;
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
+}
+.unmuted {
+    opacity: 1;
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0);
+}
+#main,
+#new,
+#observe,
+#home,
+#login,
+#connecting,
+#waiting {
+    background-repeat: no-repeat !important;
+    background-position: 0px bottom;
+    background-size: contain;
+}
+#main {
+    background-image: url('../img/illustration_knight.svg');
+}
+#new {
+    background-image: url('../img/illustration_pawn.svg');
+}
+#observe {
+    background-image: url('../img/illustration_king.svg');
+}
+#home,
+#connecting {
+    background-image: url('../img/illustration_rook.svg');
+}
+#login {
+    background-image: url('../img/illustration_bishop.svg');
+}
+#waiting {
+    background-image: url('../img/illustration_queen.svg');
+}
+.chatWindow, .consoleWindow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px 0;
+}
+p a {
+    margin: 0;
+    float: none;
+    color: #ec008c;
+}
+.blue {
+    background-color: #29abe2;
+}
+.pink {
+    color: #ec008c;
+}
+.waitingMessage {
+    width: 300px;
+    margin: 20px auto 15px;
+}
+.waitingMessage p {
+    margin-top: 0px;
+    line-height: 20px;
+}
+.connectMessage {
+    width: 32px;
+    margin: 0 auto 25px;
+}
+#jqt {
+border-top-width: 2px;
+border-top-style: solid;
+border-top-color: #000;
+}
+body,
+body * {
+    -webkit-user-select: none !important;
+    user-select: none !important;
+    -webkit-user-callout: none !important;
+    -webkit-touch-callout: none !important;
+}
+input,
+textarea {
+    -webkit-user-select: text !important;
+    user-select: text !important;
+    -webkit-user-callout: default !important;
+    -webkit-touch-callout: default !important;
+}
+.inviteDetails {
+    text-align: center;
+    height: 30px;
+}
+.blueButton,
+.greenButton {
+    background-color: #29abe2 !important;
+}
+img.navToggle {
+    position: absolute;
+}
+.versusNav,
+.observeNav {
+    position: absolute;
+    overflow: hidden;
+    /*margin-left: 50px;*/
+}
+.observeNav .gameButton {
+    padding: 8px 25px 0 25px;
+}
+.versusNav a,
+.observeNav a {
+    text-decoration: none
+}
+.versusNav,
+.observeNav {
+    height: 60px;
+}
+.versusNav, .observeNav, .navToggle {
+  margin-top: 25px;
+}   
+.gameButton {
+    margin: 0 1px 1px 0;
+    height: 22px;
+    float: left;
+    /*background-color: #A7A9AC;*/
+    color: #fff;
+}
+.closeNav {float: left;}
+.versus .gameButton {
+    background-color: #29abe2;
+}
+.observe .gameButton {
+    background-color: #ec008c;
+}
+ul.rounded,
+p {
+    max-width: 300px;
+    margin: 0 auto 25px auto !important;
+}
+ul.rounded {
+    border-radius: 8px !important;
+}
+p {
+    line-height: 22px;
+}
+.chatButtons {
+    width: 100%;
+    margin-bottom: 15px;
+    text-align: center;
+    float: left;
+}
+.chatButtons a.whiteButton {
+    text-align: center;
+    display: inline-block !important;
+    font-size: 18px;
+    width: 15%;
+    height: 40px;
+    margin: 0 2px !important;
+    line-height: 45px !important;
+}
+.whiteButton,
+.greenButton,
+.blueButton {
+    max-width: 300px;
+    margin: 0 auto 10px !important;
+    padding-top: 4px !important;
+    line-height: 60px !important;
+}
+.blueButton {
+  margin-bottom: 30px !important;
+}
+.waitingSpinner {
+  background-color: #29abe2;
+}
+.waitingSpinner, .spinner {
+    width: 32px;
+    height: 32px;
+    margin: 2px 20px 0 0;
+    float: left;
+}
+.spinner {
+    background-color: #ec008c;
+    -webkit-animation: rotateplane 1.2s infinite ease-in-out;
+    animation: rotateplane 1.2s infinite ease-in-out;
+}    
+@-webkit-keyframes rotateplane {
+    0% {
+        -webkit-transform: perspective(120px)
+    }
+    50% {
+        -webkit-transform: perspective(120px) rotateY(180deg)
+    }
+    100% {
+        -webkit-transform: perspective(120px) rotateY(180deg) rotateX(180deg)
+    }
+}
+@keyframes rotateplane {
+    0% {
+        transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+        -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg)
+    }
+    50% {
+        transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+        -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg)
+    }
+    100% {
+        transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+        -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    }
+}
+.register {
+    margin-top: 25px;
+}
+h1.topHead {
+  font-family: 'OpenSansCondensedLight' !important;
+  width: 100%;
+  text-align: center;
+  margin: 20px auto 5px !important;
+  font-size: 24px !important;
+  font-weight: normal !important;
+  line-height: 1.3em !important;
+  color: #000 !important;
+  text-shadow: none !important;
+}
+#jqt input {
+    margin: 0px auto;
+    width: 300px;
+}
+#login h1 {
+    margin: 20px auto 5px;
+    width: 300px;
+}
+input#password {
+    margin-bottom: 25px;
+}
+.whiteInfo,
+.blackInfo {
+    margin: 0 auto;
+    width: 80vw ;
+}
+.topBar,
+.bottomBar {
+    width: 100%;
+    margin: 10px 0;
+}
+#blackTime,
+#whiteTime,
+#blackTimeVisible,
+#whiteTimeVisible {
+    /*width: 33%;*/
+    /*min-height: 25px;*/
+    /*background-color: #ccc;*/   
+    display: inline-block;
+    float: right;
+    text-align: right;
+    padding-right: 5px;
+}
+#blackTime,
+#whiteTime {
+    display: none;
+}
+.whiteName,
+.blackName {
+    /*width: 33%;*/
+    /*min-height: 25px;*/
+    /*background-color: #ddd;*/   
+    display: inline-block;
+}
+.whiteRating,
+.blackRating {
+    /*width: 33%;*/
+    /*min-height: 25px;*/
+    /*background-color: #333;*/
+    color: #999;
+    display: inline-block;
+}
+.whiteRating,
+.whiteName,
+#whiteTime,
+#whiteTimeVisible,
+.blackRating,
+.blackName,
+#blackTime,
+#blackTimeVisible {}
+
+.inviteDetailsColor,
+.inviteDetailsRated,
+.inviteDetailsIncrement,
+.inviteDetailsTime {
+    text-transform: capitalize;
+    color: #000;
+}
+.testing {
+    display: none;
+}
+.center {
+    text-align: center;
+}
+.right {
+    float: right;
+}
+.colorOption {
+    float: right;
+    width: 25%;
+    text-align: center;
+    margin: 0px 0 15px 0;
+}
+.colorOption img.highlight {
+    border-color: rgba(0, 174, 239, 1) !important;
+}
+.colorOption img {
+    border-color: transparent;
+    border-style: solid;
+    border-width: 3px;
+}
+.whiteButton {
+    margin-bottom: 15px !important;
+}
+select#color {
+    text-transform: capitalize;
+}
+img.moreTime,
+img.lessTime,
+img.moreIncrement,
+img.lessIncrement {
+    float: right;
+    margin: -10px 0 0 15px;
+}
+li img.right {
+  margin-top:-5px;
+}
+#jqt ul li input[type=text] {
+    width: 40% !important;
+}
+#jqt ul li {
+    padding-top: 20px;
+    min-height: 55px;
+}
+#jqt .consoleWindow ul li {
+    padding-top: 0;
+    min-height: 12px;
+}
+.consoleWindow ul {min-height: 100px;}
+a.highlight {
+    text-decoration: underline;
+}
+ul#data-output,
+input,
+input#command-input {
+    width: 83%;
+    margin: 10px;
+    padding: 0 5px 0;
+}
+input#command-input {
+  position: absolute;
+  margin-top: 92vh;
+  top: 0;
+}
+ul#data-output {
+  width:90vw;
+  top: 10vh;
+  position: absolute;
+  height: 75vh;
+  background-color: #fff;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #666;
+}
+#jqt ul#data-output li {
+    /*height: 300px;*/   
+    overflow: scroll;
+    font-size: 15px !important;
+    font-family: "Courier New", mono, monospace !important;
+    white-space: no-wrap;
+    list-style-type: none;
+}
+#data-output li {
+    list-style-image: none;
+    white-space: nowrap;
+    height: 25px;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+#data-output * {
+    line-height: 25px;
+}
+input {
+    height: 32px;
+    display: block;
+}     
+.heightAdjuster {
+  height: 0;
+  width:100%;
+}
+
+/* NOTE: these media queries are 20 pixels smaller because the status bar is taken into account; */
+
+/* ----------- iPhone 4 ----------- */
+@media screen and (min-height: 300px) {
+  #jqt .current {
+    /*background-color:#ff9900;*/
+  }   
+  .gameButton {
+      padding: 8px 6px 0 6px;
+  }
+  #new .greenButton {
+    width: 200px;
+    margin: -10px 0 10px 10px !important;
+  }
+  .colorOption img {
+    height: 20px;
+  }
+  #observe .whiteButton {
+    margin: 0px auto 10px auto !important;
+    padding-top:0;
+    line-height: 58px;
+  }
+  #observe p {
+    line-height: 18px;
+  }
+  #home .whiteButton {
+    margin: 0px auto 10px auto !important;
+    padding-top:0;
+    line-height: 58px;
+  }
+  p.center.forget {
+      margin-top: 10px !important;
+      padding-bottom: 20px;
+  }
+/*  #board, .board-overlay, .board-wrapper, .whiteInfo, .blackInfo {
+      width: 300px;
+  }*/
+/*  .board-overlay {
+    margin-top: -300px;
+    height: 300px;
+  }*/
+  .game-over {
+    /*padding-top: 122px;*/
+  }
+  .inviteMinutes, .inviteSeconds {
+    width: 31.5px;
+    height: 21.5px;
+    padding-top: 7px;
+  }
+/*  .square img {
+    width: 31.5px;
+    height: 31.5px;
+  }
+  .square .square-inner {
+    width: 64px;
+    height: 60px;
+  }
+  .square {
+    width: 25%;
+  }
+  .square-inner {
+    margin-bottom: 0px !important;
+  }*/
+}
+
+/* ----------- iPhone 5 and 5s ----------- */
+@media screen and (min-height: 548px) {
+  #jqt .current {
+    /*background-color:#ff0000;*/
+  }  
+  .heightAdjuster {
+    height: 20px;
+  }
+  .whiteButton {
+      margin-bottom: 30px !important;
+  }
+  #new .greenButton {
+    width: 300px;
+    margin: 0 auto 10px !important;
+  }
+  .colorOption img {
+    height: auto;
+  }
+  p.center.forget {
+      margin-top: -20px !important;
+      padding-bottom: 40px;
+  }
+  #observe .whiteButton, #home .whiteButton {
+    margin: 0 auto 30px !important;
+    padding-top: 4px !important;
+    line-height: 60px !important;
+  }  
+  .topBar {
+    margin-top: 60px;
+  } 
+/*  .square-inner {
+    margin-bottom: 5px !important;
+  }*/
+}
+
+/* ----------- iPhone 6 ----------- */
+@media screen and (min-height: 647px) {
+  #jqt .current {
+    /*background-color: blue;*/
+  }    
+  .heightAdjuster {
+    height: 50px;
+  }
+/*#board, .board-overlay, .board-wrapper, .whiteInfo, .blackInfo {
+    width: 355px;
+}*/
+/*  .board-overlay {
+    margin-top: -355px;
+    height: 355px;
+  }*/
+/*  .game-over {
+    padding-top: 145px;
+  }*/
+  .gameButton {
+      padding: 8px 10px 0 10px;
+  }
+}
+
+/* ----------- iPhone 6+ ----------- */
+@media screen and (min-height: 716px) {
+  #jqt .current {
+    /*background-color: purple;*/
+  }    
+/*#board, .board-overlay, .board-wrapper, .whiteInfo, .blackInfo {
+    width: 394px;
+}*/
+/*  .board-overlay {
+    margin-top: -394px;
+    height: 394px;
+  }*/
+/*  .game-over {
+    padding-top: 160px;
+  }*/
+  .gameButton {
+      padding: 8px 12px 0 12px;
+  }
+}
+
+/* ----------- iPad 1, 2, 3, 4 and iPad mini landscape ----------- */
+@media screen and (min-height: 748px) {
+  #jqt .current {
+    /*background-color: yellow;*/
+  }    
+  #more .heightAdjuster {
+    height: 20px;
+  }
+  .topBar {
+    margin-top: 20px;
+  }  
+/*  #board, .board-overlay, .board-wrapper, .whiteInfo, .blackInfo {
+      width: 50vw;
+  }*/
+/*  .board-overlay {
+    margin-top: -50vw;
+  } 
+  #board, .board-overlay, .board-wrapper, .whiteInfo, .blackInfo {
+    width: 500px;
+  }*/
+/*  .board-overlay {
+    margin-top: -500px;
+    height: 500px;
+  }*/
+/*  .game-over {
+    padding-top: 210px;
+  }*/
+  .gameButton {
+      padding: 8px 15px 0 15px;
+  }
+  .inviteMinutes, .inviteSeconds {
+    width: 38px;
+    height: 28px;
+    padding-top: 10px;
+  }
+/*  .square .square-inner {
+    width: 77px;
+    height: 77px;
+  }
+  .square {
+    width: 20% !important;
+  }
+  .square img {
+    width: 38px;
+    height: 38px;
+  }*/
+
+}
+
+/* ----------- iPad 1, 2, 3, 4 and iPad mini portrait ----------- */
+@media screen and (min-height: 1004px) {
+  #jqt .current {
+    /*background-color: green;*/
+  }    
+  .heightAdjuster {
+    height: 150px;
+  }
+  #more .heightAdjuster {
+    height: 100px;
+  }
+  .bottomBar {
+    margin-bottom: 75px;
+  }
+
+}
+
+.board-wrapper {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 !important;
+  /*background-color: #ff0000;*/
+ }
+
+@media only screen and (orientation: portrait)  {
+.board-overlay {
+    width: 80vw;
+    height: 80vw;
+    margin: -80vw 10vw 0;
+
+  }
+.square-55d63, .square-55d63 img {
+    width: 10vw !important;
+    height: 10vw !important;
+  }
+  .row-5277c {
+    width: 80vw !important;  
+  }
+  #board {
+    background-color: #ff9900;
+    padding: 0 !important;
+    width: 80vw;
+    height: 80vw;
+    margin: 0 10vw;
+  }
+}
+
+@media only screen and (orientation: landscape)  {
+.board-overlay {
+    width: 80vh;
+    height: 80vh;
+    margin: -80vh auto 0;
+
+  }
+.square-55d63, .square-55d63 img {
+    width: 10vh !important;
+    height: 10vh !important;
+  }
+  .row-5277c {
+    width: 80vh !important;  
+  }
+
+  #board {
+    /*background-color: #ff9900;*/
+    padding: 0 !important;
+    width: 80vh;
+    height: 80vh;
+    margin: 0 auto;
+  }
+}
