@@ -13,6 +13,7 @@ var app = {
 };
 function init() {
   stopSpinners('all');
+  prewarmRelay(); // start waking the relay so it's ready when the player connects
   if(autoLoginCheck==="yes") {
     autoLogin();
   }
@@ -192,6 +193,15 @@ if(gameIncrement==null){
 }
 $('.increment').html(gameIncrement);
 
+function prewarmRelay() {
+  // Nudge the relay (Render free tier) awake on page load so it's likely ready by
+  // the time the player taps Guest. Fire-and-forget; no-cors avoids console noise.
+  if (navigator.onLine === false || typeof RELAY_URL === "undefined") { return; }
+  try {
+    var httpUrl = RELAY_URL.replace(/^ws/, "http").replace(/\/ws$/, "/");
+    fetch(httpUrl, { mode: "no-cors", cache: "no-store" }).catch(function () {});
+  } catch (e) {}
+}
 function connectToHost(host, port) {
   invalidPassword="no"; // clears the invalid password variable so you get password error message
   if (navigator.onLine === false) {
