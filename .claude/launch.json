@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "chess-dev",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["server/dev-server.js"],
+      "port": 5050,
+      "autoPort": true
+    }
+  ]
+}

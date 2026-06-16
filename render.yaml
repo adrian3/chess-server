@@ -1,0 +1,12 @@
+# Render Blueprint for the FICS WebSocket relay.
+# Either: Render dashboard -> New -> Blueprint -> pick this repo (uses this file),
+# or create a Web Service manually with the settings shown below.
+services:
+  - type: web
+    name: fics-relay
+    runtime: node
+    rootDir: server
+    plan: free
+    buildCommand: npm install
+    startCommand: node app.js
+    healthCheckPath: /health

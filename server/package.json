@@ -1,0 +1,13 @@
+{
+  "name": "fics-relay",
+  "version": "1.0.0",
+  "description": "WebSocket <-> TCP relay bridging a browser to the FICS telnet server.",
+  "main": "app.js",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "ws": "^8.17.1"
+  }
+}

@@ -38,7 +38,7 @@ var jQT = new $.jQT({
   statusBar: 'black-translucent',
   preloadImages: []
 });
-var testing="on"; // only remove this if the code is cleaned up to remove testing code
+var testing="off"; // "on" suppresses socket writes for offline UI testing; "off" sends to the relay/FICS
 var loggedIn=false;
 var loggedInAsGuest="";
 var timerStatus="inactive";
