@@ -26,9 +26,7 @@ if (!navigator.notification) {
 
 // Relay endpoint. The UI is hosted on GitHub Pages and the relay runs on Render,
 // so this points at the Render service.
-// >>> REPLACE the hostname below with your actual Render URL (shown on the service
-//     dashboard, e.g. fics-relay-ab12.onrender.com). Keep the "wss://" and "/ws". <<<
-var RELAY_URL = "wss://REPLACE-WITH-YOUR-SERVICE.onrender.com/ws";
+var RELAY_URL = "wss://chess-server-tscr.onrender.com/ws";
 
 // Local-dev convenience: when served from localhost (server/dev-server.js), use the
 // local relay on the same origin instead of Render.
