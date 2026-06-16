@@ -193,6 +193,11 @@ $('.increment').html(gameIncrement);
 
 function connectToHost(host, port) {
   invalidPassword="no"; // clears the invalid password variable so you get password error message
+  if (navigator.onLine === false) {
+    appAlert("You appear to be offline. Connect to the internet to play on FICS.", "No Connection");
+    setDisconnected();
+    return;
+  }
   window.socket = new Socket();
   window.socket.onData = receiveData;
   window.socket.onError = function(errorMessage) {
