@@ -40,6 +40,8 @@ server.on('upgrade', (req, socket, head) => {
   wss.handleUpgrade(req, socket, head, (ws) => wss.emit('connection', ws));
 });
 wss.on('connection', (ws) => {
+  ws.isAlive = true;
+  ws.on('pong', () => { ws.isAlive = true; });
   const tcp = net.connect(FICS_PORT, FICS_HOST);
   let open = false; const pending = [];
   tcp.on('connect', () => { open = true; while (pending.length) tcp.write(pending.shift()); });
@@ -50,5 +52,16 @@ wss.on('connection', (ws) => {
   ws.on('close', () => { try { tcp.destroy(); } catch (e) {} });
   ws.on('error', () => { try { tcp.destroy(); } catch (e) {} });
 });
+
+// Heartbeat: terminate clients that miss a pong (gone without a clean close) so
+// their FICS sockets get cleaned up. Mirrors app.js.
+const heartbeat = setInterval(() => {
+  wss.clients.forEach((ws) => {
+    if (ws.isAlive === false) { ws.terminate(); return; }
+    ws.isAlive = false;
+    try { ws.ping(); } catch (e) {}
+  });
+}, 30000);
+wss.on('close', () => clearInterval(heartbeat));
 
 server.listen(PORT, () => console.log('dev server on http://localhost:' + PORT));

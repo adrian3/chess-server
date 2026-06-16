@@ -1,7 +1,7 @@
 'use strict';
-// FICS relay: bridges browser WebSocket <-> raw TCP telnet to freechess.org.
-// Runs as a Phusion Passenger Node app on DreamHost. Static files (the chess UI)
-// are served by Passenger from ./public; this process only handles the /ws upgrade.
+// FICS relay: bridges a browser WebSocket <-> raw TCP telnet to freechess.org,
+// because browsers can't open raw TCP. Deployed as a Node web service on Render
+// (the UI is hosted separately on GitHub Pages); this process only handles /ws.
 //
 // The TCP target is hardcoded so this can never be used as an open proxy to
 // arbitrary hosts -- it only ever talks to FICS.
@@ -41,6 +41,9 @@ server.on('upgrade', (req, socket, head) => {
 });
 
 wss.on('connection', (ws) => {
+  ws.isAlive = true;
+  ws.on('pong', () => { ws.isAlive = true; });
+
   const tcp = net.connect(FICS_PORT, FICS_HOST);
   let tcpOpen = false;
   const pending = []; // bytes the browser sent before the TCP socket finished connecting
@@ -64,6 +67,19 @@ wss.on('connection', (ws) => {
   ws.on('error', () => { try { tcp.destroy(); } catch (e) {} });
 });
 
-// Passenger patches listen() and supplies the bind target; the port here is only
-// used if you run the file directly with `node app.js` for local testing.
+// Heartbeat: ping each client periodically. If a client misses a pong it has gone
+// away (tab closed / reloaded / network dropped) without a clean close, so terminate
+// it -- that fires the ws 'close' handler above, tearing down its FICS socket and
+// preventing zombie connections from piling up. Also keeps connections alive through
+// Render's proxy. Browsers auto-respond to pings, so no client code is needed.
+const HEARTBEAT_MS = 30000;
+const heartbeat = setInterval(() => {
+  wss.clients.forEach((ws) => {
+    if (ws.isAlive === false) { ws.terminate(); return; }
+    ws.isAlive = false;
+    try { ws.ping(); } catch (e) {}
+  });
+}, HEARTBEAT_MS);
+wss.on('close', () => clearInterval(heartbeat));
+
 server.listen(process.env.PORT || 5050);
