@@ -2,3 +2,4 @@
 Icon*
 .codekit-cache/
 .claude/settings.local.json
+.run/

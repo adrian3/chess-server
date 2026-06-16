@@ -152,7 +152,8 @@ ul.availableGames li img {
   }
   .availableGames img {
     float: left;
-    width: 10%;
+    width: auto;
+    height: 50px;
     margin-right: 10px;
     /*max-width: 45%;*/
 /*    border-top-style: solid;
@@ -403,19 +404,6 @@ ul.availableGames li.slideHide {
   <div class="square box50"></div> -->
 </div>
 
-<a href="#" onclick="loopThroughGameList(demoArray)">Array 0</a>
-<a href="#" onclick="loopThroughGameList(demoArray1)">Array 1</a>
-<a href="#" onclick="loopThroughGameList(demoArray2)">Array 2</a>
-<a href="#" onclick="loopThroughGameList(demoArray3)">Array 3</a>
-<a href="#" onclick="loopThroughGameList(demoArra4)">Array 4</a>
-<a href="#" onclick="loopThroughGameList(demoArray5)">Array 5</a>
-<a href="#" onclick="loopThroughGameList(demoArray6)">Array 6</a>
-<a href="#" onclick="loopThroughGameList(demoArray7)">Array 7</a>
-<a href="#" onclick="loopThroughGameList(demoArray8)">Array 8</a>
-
-<!-- <a href="#" onclick="loopThroughGameList(demoArray9)">Array 9</a> -->
-<!-- <a href="#" onclick="loopThroughGameListTest('testlist2')">List 1</a> -->
-
   </div>
 
 
@@ -462,7 +450,7 @@ ul.availableGames li.slideHide {
     <a class="whiteButton" href="#new">Create New Game</a>
     <div class="whiteButton soughtGames">View Open Tables</div>
     <a class="whiteButton" href="#observe">Watch Top Players</a>
-    <a class="whiteButton" href="#more">More Chess Apps</a>
+    <a class="whiteButton" href="#more" style="display: none;">More Chess Apps</a>
     <p class="center"><a class="pink" href="#" onclick="logout();">&lt; Log Out</a></p>
   </div>
   <!-- Observe -->
@@ -495,7 +483,7 @@ ul.availableGames li.slideHide {
 </div><!-- End JQT -->
 
 <div style="pointer-events: none; position: absolute; z-index:999; bottom: 0; width: 100%; height:100%;">
-<a onclick="openConsole();" style="pointer-events: auto;">[CONSOLE]</a>
+<a onclick="openConsole();" style="pointer-events: auto; display: none;">[CONSOLE]</a>
     <div class="consoleWindow">
       <img style="pointer-events: auto;" onclick="closeConsole();" class="closeButton" src="img/toolbar-close.svg">
       <!-- <h1>Console</h1> -->

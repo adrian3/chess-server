@@ -544,9 +544,9 @@ function checkForObserving(msg) {
   }
 }
 
-function checkForNotInGame() {
+function checkForNotInGame(msg) {
   // You are not playing or examining a game
-  var NotInGamePattern = new RegExp('You are not playing or examining a game'); 
+  var NotInGamePattern = new RegExp('You are not playing or examining a game');
   if (NotInGamePattern.test(msg) === true) {
     jQT.goTo('#main', 'slideright');      
   }
