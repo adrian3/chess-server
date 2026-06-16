@@ -1,41 +1,53 @@
 # Chess Server
 
-A browser-based client for playing chess on [FICS](http://www.freechess.org)
-(the Free Internet Chess Server). Originally a Cordova/iOS app; now a plain web app.
+Play chess against real people around the world — free, with nothing to download.
 
-## How it works
+### ▶ Play now: **https://adrian3.github.io/chess-server/**
 
-FICS only speaks raw telnet on `freechess.org:5000`, and browsers can't open raw TCP
-sockets. So the app connects through a small **WebSocket↔TCP relay**:
+## What is it?
 
-```
-Browser (GitHub Pages) ── wss ──▶ relay (Render) ── TCP ──▶ freechess.org:5000
-```
+Chess Server is a simple, friendly way to play live chess on
+[FICS](https://www.freechess.org) (the Free Internet Chess Server) right from your
+web browser — on your phone, tablet, or computer. No sign-up required: jump in as a
+guest, or log in with a free FICS account if you have one.
 
-- `index.html` + `js/` + `css/` — the static UI (jQuery / jQTouch / chessboard.js /
-  chess.js). No build step; `index.html` loads `js/app.js` directly.
-- `js/websocket-socket.js` — a shim exposing the same interface the old Cordova TCP
-  plugin did (`.open/.write/.onData/...`), but tunneling through the relay. Set your
-  relay URL (`RELAY_URL`) here.
-- `server/` — the relay (`app.js`), a local dev server (`dev-server.js`), and
-  deployment instructions (`DEPLOY.md`).
+## How to play
 
-## Hosting
+1. Open **https://adrian3.github.io/chess-server/**.
+2. Tap **Guest** (or **Registered User** to log in).
+3. From there you can:
+   - **Create New Game** — pick your time control and color, then find an opponent.
+   - **View Open Tables** — join a game someone else is waiting to play.
+   - **Watch Top Players** — observe live games by strong players.
+4. Drag and drop pieces to move. That's it — have fun!
 
-- **UI:** GitHub Pages (repo must be public for the free tier).
-- **Relay:** Render web service (free tier; sleeps when idle, ~30–60s cold start).
+> **First connection feels slow?** That's normal. The game server goes to sleep when
+> no one's using it and takes up to a minute to wake up. You'll see a "please wait"
+> message — just hang on and it'll connect.
 
-Full step-by-step in [server/DEPLOY.md](server/DEPLOY.md).
+## Install it like an app
 
-## Local development
+You can add Chess Server to your device so it opens in its own window with its own
+icon, just like an app from the store:
 
-```bash
-cd server && npm install && node dev-server.js
-# open http://localhost:5050/  — serves the UI and the relay on one origin
-```
+- **iPhone / iPad (Safari):** tap **Share** → **Add to Home Screen**.
+- **Android (Chrome):** tap the **⋮** menu → **Install app** (or **Add to Home screen**).
+- **Computer (Chrome / Edge):** click the **Install** icon in the address bar, or
+  open the **⋮** menu → **Install Chess Server**.
 
-## Notes
+Once installed, it launches full-screen with the chess icon and works just like the
+website.
 
-- The relay's TCP target is hardcoded to FICS, so it can't be used as an open proxy.
-- The relay code is host-agnostic — it also runs on any platform that allows a
-  persistent Node process (Fly.io, a VPS, etc.), not just Render.
+## Good to know
+
+- It's completely **free and ad-free**.
+- You need an **internet connection** to play (games happen live on FICS). If you go
+  offline, the app will let you know.
+
+---
+
+### For the curious (how it's built)
+
+It's a static web app hosted on GitHub Pages, plus a small relay service (on Render)
+that connects your browser to the FICS chess server. Developer and deployment notes
+are in [`server/DEPLOY.md`](server/DEPLOY.md).

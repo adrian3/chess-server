@@ -46,6 +46,7 @@ var refreshTimer="";
 var watchingForGames = "no";
 var socket;
 var timer;
+var slowConnectTimer;
 var castle="";
 var boardLock="release";
 var observeType;
@@ -201,20 +202,24 @@ function connectToHost(host, port) {
   window.socket = new Socket();
   window.socket.onData = receiveData;
   window.socket.onError = function(errorMessage) {
+    clearTimeout(slowConnectTimer);
     appAlert("Log in to continue...", "Disconnected");
     loggedIn=false;
     console.log("Error occured, error: " + errorMessage);
     // alert("Error occured, error: " + errorMessage);
   };
   window.socket.onClose = function(hasError) {
+    clearTimeout(slowConnectTimer);
     console.info("Socket closed, hasErrors=" + hasError);
     setDisconnected();
   };
+  setConnected(); // show the connecting screen and start the slow-connection timer
   window.socket.open(
     host,
     port,
-    setConnected(),
+    onRelayConnected, // success: the relay socket opened (cold start, if any, is over)
     function(errorMessage) {
+    clearTimeout(slowConnectTimer);
     appAlert("Couldn't connect to server. Are you connected to the internet?", "Error");
     console.log("Error during connection, error: " + errorMessage);
     // alert("Error during connection, error: " + errorMessage);
@@ -222,9 +227,25 @@ function connectToHost(host, port) {
 }
 function setConnected() {
   startSpinners('connecting');
+  $('.slowConnectNote').remove();
   jQT.goTo('#connecting', 'fade');
+  // The relay (Render free tier) can be asleep; if the socket is slow to open,
+  // show a soft "waking up" message rather than a silent spinner.
+  clearTimeout(slowConnectTimer);
+  slowConnectTimer = setTimeout(showSlowConnect, 4000);
+}
+function showSlowConnect() {
+  if ($('.slowConnectNote').length === 0) {
+    $('#connecting .connectMessage').append('<p class="center slowConnectNote">Please wait while a connection to the server is re-established. The free server may take a moment to wake up.</p>');
+  }
+}
+function onRelayConnected() {
+  clearTimeout(slowConnectTimer);
+  $('.slowConnectNote').remove();
 }
 function setDisconnected() {
+  clearTimeout(slowConnectTimer);
+  $('.slowConnectNote').remove();
   jQT.goTo('#home', 'slideright');
 }
 function addTextToOutputElement(text) {
