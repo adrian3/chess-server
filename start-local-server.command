@@ -3,12 +3,15 @@ set -euo pipefail
 
 APP_NAME="Chess Server (Local)"
 APP_ID="chess-server"
-PORT=4400
-URL="http://127.0.0.1:${PORT}/"
+START_PORT="${PORT:-4400}"
+PORT_SPAN=40
+PORT="$START_PORT"
+URL=""
 APP_DIR="$(cd "$(dirname "$0")" && pwd)"
 RUN_DIR="$APP_DIR/.run"
 PID_FILE="$RUN_DIR/${APP_ID}.pid"
 LOG_FILE="$RUN_DIR/${APP_ID}.log"
+PORT_FILE="$RUN_DIR/${APP_ID}.port"
 
 mkdir -p "$RUN_DIR"
 
@@ -65,23 +68,41 @@ stop_previous_app() {
 }
 
 port_owner_pid() {
-  lsof -nP -tiTCP:"$PORT" -sTCP:LISTEN 2>/dev/null || true
+  local port="$1"
+  lsof -nP -tiTCP:"$port" -sTCP:LISTEN 2>/dev/null || true
 }
 
-ensure_port_is_safe() {
-  local pid
-  pid="$(port_owner_pid)"
-  [[ -n "${pid:-}" ]] || return 0
+choose_port() {
+  local candidate limit pids pid
+  limit=$((START_PORT + PORT_SPAN - 1))
 
-  if matches_app_process "$pid"; then
-    stop_pid_if_matches "$pid"
-    sleep 1
-  else
-    local details
-    details="$(process_details "$pid")"
-    alert "Port $PORT is already in use by another process:\n\n$details"
-    exit 1
-  fi
+  for (( candidate = START_PORT; candidate <= limit; candidate++ )); do
+    pids="$(port_owner_pid "$candidate")"
+    if [[ -z "${pids:-}" ]]; then
+      PORT="$candidate"
+      URL="http://127.0.0.1:${PORT}/"
+      echo "$PORT" > "$PORT_FILE"
+      return 0
+    fi
+
+    for pid in ${(f)pids}; do
+      [[ -n "${pid:-}" ]] || continue
+      if matches_app_process "$pid"; then
+        stop_pid_if_matches "$pid"
+      fi
+    done
+
+    pids="$(port_owner_pid "$candidate")"
+    if [[ -z "${pids:-}" ]]; then
+      PORT="$candidate"
+      URL="http://127.0.0.1:${PORT}/"
+      echo "$PORT" > "$PORT_FILE"
+      return 0
+    fi
+  done
+
+  alert "No free port found from $START_PORT through $limit."
+  exit 1
 }
 
 ensure_dependencies() {
@@ -112,7 +133,7 @@ wait_until_ready() {
 
 record_server_pid() {
   local live_pid
-  live_pid="$(port_owner_pid)"
+  live_pid="$(port_owner_pid "$PORT")"
   if [[ -n "${live_pid:-}" ]]; then
     echo "$live_pid" > "$PID_FILE"
     return 0
@@ -123,7 +144,7 @@ record_server_pid() {
 main() {
   ensure_node
   stop_previous_app
-  ensure_port_is_safe
+  choose_port
   ensure_dependencies
   start_server
 
