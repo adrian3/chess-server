@@ -2,8 +2,7 @@
 // Local development server: serves the static UI from the repo root AND provides
 // the /ws FICS relay on the same origin, so you can run the whole app locally with
 //   cd server && npm install && node dev-server.js
-// then open http://localhost:5050/  (NOT for production — DreamHost uses Passenger
-// with app.js; see DEPLOY.md).
+// then open http://localhost:5050/ (local development only; see DEPLOY.md).
 
 const http = require('http');
 const net = require('net');

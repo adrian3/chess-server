@@ -206,7 +206,7 @@
     <img src="images/icon.png" alt="Chess Server" class="hero-icon">
     <div class="hero-label">Tool  &nbsp;·&nbsp;  JavaScript</div>
     <h1>Chess Server</h1>
-    <p class="hero-tagline">Multiplayer chess server client interface.</p>
+    <p class="hero-tagline">Play live chess on FICS from the browser.</p>
     <div class="hero-meta">
       <div class="meta-item">
         <span class="meta-label">Language</span>
@@ -214,7 +214,15 @@
       </div>
       <div class="meta-item">
         <span class="meta-label">GitHub</span>
-        <span class="meta-value"><a href="https://github.com/adrian3/chess-server" target="_blank" rel="noopener" style="color:var(--primary);text-decoration:none;">adrian3/chess-server</a> &nbsp;(Private)</span>
+        <span class="meta-value"><a href="https://github.com/adrian3/chess-server" target="_blank" rel="noopener" style="color:var(--primary);text-decoration:none;">adrian3/chess-server</a></span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">GitHub Pages</span>
+        <span class="meta-value"><a href="https://adrian3.github.io/chess-server/" target="_blank" rel="noopener" style="color:var(--primary);text-decoration:none;">https://adrian3.github.io/chess-server/</a></span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">On the App Store</span>
+        <span class="meta-value">Originally on the App Store (2010–2015): 7,860 downloads.</span>
       </div>
     </div>
   </header>
@@ -227,27 +235,40 @@
   <section class="section">
     <div class="section-heading">What it does</div>
     <ul class="feature-list">
-      <li>Multiplayer chess client — play against another person over a local network</li>
-      <li>Connects to a shared game server to synchronize moves between two players</li>
-      <li>Real-time move updates with no page refresh required</li>
+      <li>Play live chess on FICS (the Free Internet Chess Server) as a guest or registered user</li>
+      <li>Create a game with minutes, increment, rated or unrated play, and White, Black or Random color</li>
+      <li>Browse open games filtered by color and rated or unrated, sorted by time or rating; computer opponents are hidden</li>
+      <li>Watch the top-rated live Lightning, Blitz or Standard game</li>
+      <li>Drag-and-drop moves; take back, draw, abort, adjourn, resign and rematch</li>
+      <li>Chat with your opponent, use quick messages, and mute chat</li>
+      <li>See your rating change after each game</li>
+      <li>Installable as an app</li>
     </ul>
   </section>
 
   <section class="section">
     <div class="section-heading">How to use</div>
-    <p>Both players open the client and connect to the same server instance. One player creates a game and shares the game ID. The second player joins using that ID. Moves are synchronized automatically.</p>
+    <p>Open the page, choose Guest or Registered User, then choose Create New Game, View Open Tables, or Watch Top Players. The first connection can take up to a minute while the server wakes up.</p>
   </section>
 
   <section class="section">
     <div class="section-heading">Built with</div>
     <table class="file-table">
       <tr>
-        <td><a href="https://github.com/jhlywa/chess.js" target="_blank" rel="noopener">chess.js</a></td>
-        <td>Move validation and game state management</td>
+        <td>chess.js</td>
+        <td>Chess rules and game state</td>
       </tr>
       <tr>
-        <td><a href="https://chessboardjs.com" target="_blank" rel="noopener">chessboard.js</a></td>
-        <td>Interactive board UI and piece rendering</td>
+        <td>chessboard.js 0.3.0</td>
+        <td>Board and drag-and-drop moves</td>
+      </tr>
+      <tr>
+        <td>JavaScript</td>
+        <td>jQuery and jQTouch</td>
+      </tr>
+      <tr>
+        <td>Node WebSocket relay</td>
+        <td>Hosted on Render; connects the browser to freechess.org</td>
       </tr>
     </table>
   </section>
