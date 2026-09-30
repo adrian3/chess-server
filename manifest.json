@@ -1,6 +1,6 @@
 {
   "name": "Chess Server",
-  "short_name": "Chess",
+  "short_name": "Chess Server",
   "description": "Play chess on the Free Internet Chess Server (FICS).",
   "start_url": ".",
   "scope": ".",
