@@ -1,7 +1,7 @@
 // Service worker for the Chess Server PWA. Caches the app shell so the installed
 // app loads instantly and the UI opens offline. (Playing still needs the network:
 // the WebSocket relay / FICS can't be cached.) Bump CACHE to ship an update.
-const CACHE = 'chess-server-v2';
+const CACHE = 'chess-server-v3';
 
 const CORE = [
   'index.html',
