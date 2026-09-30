@@ -32,8 +32,8 @@ function init() {
 }
 // Fire up jQTouch
 var jQT = new $.jQT({
-  icon: 'jqtouch.png',
-  icon4: 'jqtouch4.png',
+  icon: false,
+  icon4: false,
   addGlossToIcon: false,
   startupScreen: 'jqt_startup.png',
   statusBar: 'black-translucent',
