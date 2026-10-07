@@ -1,53 +1,59 @@
+<img src="apple-touch-icon.png" width="120" height="120" alt="Chess Server app icon">
+
 # Chess Server
 
 Play chess against real people around the world — free, with nothing to download.
 
-### ▶ Play now: **https://adrian3.github.io/chess-server/**
+**[Play Chess Server — free](https://adrian3.github.io/chess-server/)**
 
-## What is it?
+Meet your next opponent on [FICS, the Free Internet Chess Server](https://www.freechess.org/), from your phone, tablet, or computer. Jump in as a guest, or sign in with your free FICS account.
 
-Chess Server is a simple, friendly way to play live chess on
-[FICS](https://www.freechess.org) (the Free Internet Chess Server) right from your
-web browser — on your phone, tablet, or computer. No sign-up required: jump in as a
-guest, or log in with a free FICS account if you have one.
+## A seat at the board
 
-## How to play
+- **Find a live opponent.** Create a game with your preferred time control and color, or join an open table.
+- **Watch strong players.** Follow live games and see how experienced players handle the position.
+- **Start simply.** Guest play lets you get straight to the board without creating an account.
 
-1. Open **https://adrian3.github.io/chess-server/**.
-2. Tap **Guest** (or **Registered User** to log in).
-3. From there you can:
-   - **Create New Game** — pick your time control and color, then find an opponent.
-   - **View Open Tables** — join a game someone else is waiting to play.
-   - **Watch Top Players** — observe live games by strong players.
-4. Drag and drop pieces to move. That's it — have fun!
+## Start playing
 
-> **First connection feels slow?** That's normal. The game server goes to sleep when
-> no one's using it and takes up to a minute to wake up. You'll see a "please wait"
-> message — just hang on and it'll connect.
+1. Open Chess Server and choose **Guest** or **Registered User**.
+2. Choose **Create New Game**, **View Open Tables**, or **Watch Top Players**.
+3. Drag a piece to make your move.
 
-## Install it like an app
+**An internet connection is required.** Chess Server connects you to live games through an online relay. The first connection can take up to a minute while that service wakes up; keep the app open while it connects.
 
-You can add Chess Server to your device so it opens in its own window with its own
-icon, just like an app from the store:
+## From the App Store to the web
 
-- **iPhone / iPad (Safari):** tap **Share** → **Add to Home Screen**.
-- **Android (Chrome):** tap the **⋮** menu → **Install app** (or **Add to Home screen**).
-- **Computer (Chrome / Edge):** click the **Install** icon in the address bar, or
-  open the **⋮** menu → **Install Chess Server**.
+Originally released for iOS, Chess Server reached **7,860 App Store downloads**. It is now available free as a web app, with the same focus on getting you into a live game.
 
-Once installed, it launches full-screen with the chess icon and works just like the
-website.
+*Lifetime iOS download totals (first-time downloads/purchases), from Ade’s App Store Connect export of September 29, 2026.*
 
-## Good to know
+## Keep it on your home screen
 
-- It's completely **free and ad-free**.
-- You need an **internet connection** to play (games happen live on FICS). If you go
-  offline, the app will let you know.
+These are progressive web apps (PWAs): open the link above to play, or install the app from your browser for quick access with its own icon.
 
----
+**iPhone or iPad**
+1. Open the app in **Safari**.
+2. Tap **Share** (you may need to open the **Page Menu** first), then **Add to Home Screen**.
+3. Turn on **Open as Web App** if that option appears, then tap **Add**.
+4. Launch it from your home screen.
 
-### For the curious (how it's built)
+**Android**
+1. Open the app in **Chrome**.
+2. Tap **⋮** → **Add to home screen** → **Install** (or **Install app**, depending on your browser).
+3. Follow the prompts, then launch it from your home screen or app drawer.
 
-It's a static web app hosted on GitHub Pages, plus a small relay service (on Render)
-that connects your browser to the FICS chess server. Developer and deployment notes
-are in [`server/DEPLOY.md`](server/DEPLOY.md).
+Need help? See [Apple’s home screen instructions](https://support.apple.com/guide/iphone/open-as-web-app-iphea86e5236/ios) or [Chrome’s installation guide](https://support.google.com/chrome/answer/9658361?co=GENIE.Platform%3DAndroid&hl=en).
+
+## Four ways to enjoy chess
+
+Originally released for iOS, this family of chess apps is now available **free as PWAs** on phones, tablets, and computers.
+
+| App | Find your next challenge |
+| --- | --- |
+| [Chess Puzzles](https://adrian3.github.io/chess-puzzles/) | Find the checkmate in 367 puzzles. |
+| [Eugene Chess](https://adrian3.github.io/eugene-chess/) | Play against the computer at your own pace. |
+| [Chess Server](https://adrian3.github.io/chess-server/) | Play live opponents and watch games on FICS. |
+| [Grandmaster Archive](https://adrian3.github.io/grandmaster-archive/) | Replay classic games and learn from the greats. |
+
+Designed and developed by **[Ade Hanft](https://adrian3.com)**.
