@@ -26,8 +26,6 @@ Meet your next opponent on [FICS, the Free Internet Chess Server](https://www.fr
 
 Originally released for iOS, Chess Server reached **7,860 App Store downloads**. It is now available free as a web app, with the same focus on getting you into a live game.
 
-*Lifetime iOS download totals (first-time downloads/purchases), from Ade’s App Store Connect export of September 29, 2026.*
-
 ## Keep it on your home screen
 
 These are progressive web apps (PWAs): open the link above to play, or install the app from your browser for quick access with its own icon.
